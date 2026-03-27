@@ -1,0 +1,721 @@
+===== PWD =====
+/opt/dpr-teksys/frontend/dpr-web
+
+===== STRUCTURE =====
+.
+./app
+./app/api
+./app/api/contact
+./app/api/proxy
+./app/components
+./app/components/AuthGuard.tsx
+./app/components/Header.tsx
+./app/components/Header.tsx.bak_hide_tagline.2026-02-27_111524
+./app/favicon.ico
+./app/forgot-password
+./app/forgot-password/page.tsx
+./app/globals.css
+./app/layout.tsx
+./app/layout.tsx.bak_title_icon.2026-02-27_114054
+./app/layout.tsx.bak_title_icon_fix.2026-02-27_114310
+./app/login
+./app/login/page.tsx
+./app/page.tsx
+./app/page.tsx.bak_2026-02-22_152913
+./app/page.tsx.bak_cleanup_override.2026-02-28_095712
+./app/page.tsx.bak_contactfix_20260228_121221
+./app/page.tsx.bak_css_cleanup.2026-02-28_074534
+./app/page.tsx.bak_fix_depth_overflow.2026-02-28_092600
+./app/page.tsx.bak_fix_orphan_overrides.2026-02-28_100516
+./app/page.tsx.bak_footerinfo_mobile_fix.2026-02-28_091837
+./app/page.tsx.bak_force_mobile_onecol.2026-02-28_094842
+./app/page.tsx.bak_form_50pct_singlecol.2026-02-28_082254
+./app/page.tsx.bak_form_fix.2026-02-27_112941
+./app/page.tsx.bak_form_half_left.2026-02-28_065339
+./app/page.tsx.bak_formwiden.2026-02-28_055953
+./app/page.tsx.bak_formwiden2.2026-02-28_061626
+./app/page.tsx.bak_formwiden_exact.2026-02-28_061819
+./app/page.tsx.bak_form_wider_fields.2026-02-28_063133
+./app/page.tsx.bak_grid2_2col.2026-02-28_063924
+./app/page.tsx.bak_grid2_cleanup.2026-02-28_080656
+./app/page.tsx.bak_grid2_force_singlecol.2026-02-28_084005
+./app/page.tsx.bak_grid2_singlecol.2026-02-28_081059
+./app/page.tsx.bak_half_left_singlecol.2026-02-28_071355
+./app/page.tsx.bak_inp_height_mobile_overflow.2026-02-28_091759
+./app/page.tsx.bak_inp_only.2026-02-28_062221
+./app/page.tsx.bak_input_width.2026-02-28_055427
+./app/page.tsx.bak_label_spacing.2026-02-27_112121
+./app/page.tsx.bak_lbl_tailwind.2026-02-27_113156
+./app/page.tsx.bak_make_style_global.2026-02-28_084425
+./app/page.tsx.bak_message_label_mt.2026-02-27_113541
+./app/page.tsx.bak_mobile_stack_depth.2026-02-28_094247
+./app/projects
+./app/projects/layout.tsx
+./app/projects/page.tsx
+./app/projects/page.tsx.bak.add-schedule-ui.1772539296
+./app/projects/page.tsx.bak.add-schedule-ui.1772539355
+./app/projects/page.tsx.bak.add-schedule-ui.1772539498
+./app/projects/page.tsx.bak.before_split.1772543571
+./app/projects/page.tsx.bak.fix_braces.1772542580
+./app/projects/page.tsx.bak.fix_braces2.1772542695
+./app/projects/page.tsx.bak.fix_braces3.1772542762
+./app/projects/page.tsx.bak.fix_card.1772542417
+./app/projects/page.tsx.bak.fix_card.1772542469
+./app/projects/page.tsx.bak.fix_last3.1772543085
+./app/projects/page.tsx.bak.fix_onchange_close.1772542830
+./app/projects/page.tsx.bak.fix_onchange_close.1772542889
+./app/projects/page.tsx.bak.fix_select_clean.1772542951
+./app/projects/page.tsx.bak.fix_taskrows.1772543017
+./app/projects/page.tsx.bak.force_dynamic.1772543392
+./app/projects/page.tsx.bak.insert_card.1772542310
+./app/projects/page.tsx.bak.schedule.1772541668
+./app/projects/page.tsx.bak.schedule.1772541722
+./app/projects/page.tsx.bak.schedule_fix.1772541917
+./app/projects/page.tsx.bak.schedule_fix2.1772542102
+./app/projects/ProjectsClient.tsx
+./app/register
+./app/register/page.tsx
+./app/reset-password
+./app/reset-password/page.tsx
+./Build
+./Dockerfile
+./dpr-web@0.1.0
+./.env.local
+./eslint.config.mjs
+./frontend_structure_dump.txt
+./.git
+./.git/branches
+./.git/COMMIT_EDITMSG
+./.git/config
+./.git/description
+./.git/HEAD
+./.git/hooks
+./.git/hooks/applypatch-msg.sample
+./.git/hooks/commit-msg.sample
+./.git/hooks/fsmonitor-watchman.sample
+./.git/hooks/post-update.sample
+./.git/hooks/pre-applypatch.sample
+./.git/hooks/pre-commit.sample
+./.git/hooks/pre-merge-commit.sample
+./.git/hooks/prepare-commit-msg.sample
+./.git/hooks/pre-push.sample
+./.git/hooks/pre-rebase.sample
+./.git/hooks/pre-receive.sample
+./.git/hooks/push-to-checkout.sample
+./.git/hooks/update.sample
+./.gitignore
+./.git/index
+./.git/info
+./.git/info/exclude
+./.git/logs
+./.git/logs/HEAD
+./.git/logs/refs
+./.git/objects
+./.git/objects/00
+./.git/objects/03
+./.git/objects/04
+./.git/objects/05
+./.git/objects/07
+./.git/objects/09
+./.git/objects/0c
+./.git/objects/0d
+./.git/objects/0f
+./.git/objects/12
+./.git/objects/13
+./.git/objects/17
+./.git/objects/1a
+./.git/objects/1b
+./.git/objects/1e
+./.git/objects/1f
+./.git/objects/20
+./.git/objects/21
+./.git/objects/22
+./.git/objects/23
+./.git/objects/24
+./.git/objects/29
+./.git/objects/2a
+./.git/objects/2b
+./.git/objects/35
+./.git/objects/38
+./.git/objects/39
+./.git/objects/3a
+./.git/objects/3c
+./.git/objects/40
+./.git/objects/41
+./.git/objects/42
+./.git/objects/45
+./.git/objects/47
+./.git/objects/4e
+./.git/objects/50
+./.git/objects/51
+./.git/objects/54
+./.git/objects/55
+./.git/objects/56
+./.git/objects/58
+./.git/objects/5b
+./.git/objects/5e
+./.git/objects/61
+./.git/objects/62
+./.git/objects/64
+./.git/objects/6e
+./.git/objects/71
+./.git/objects/77
+./.git/objects/7e
+./.git/objects/7f
+./.git/objects/80
+./.git/objects/83
+./.git/objects/85
+./.git/objects/86
+./.git/objects/88
+./.git/objects/8e
+./.git/objects/90
+./.git/objects/91
+./.git/objects/92
+./.git/objects/97
+./.git/objects/98
+./.git/objects/a3
+./.git/objects/a5
+./.git/objects/a9
+./.git/objects/aa
+./.git/objects/ae
+./.git/objects/af
+./.git/objects/b0
+./.git/objects/b2
+./.git/objects/b5
+./.git/objects/b6
+./.git/objects/b8
+./.git/objects/ba
+./.git/objects/bc
+./.git/objects/bd
+./.git/objects/c0
+./.git/objects/c2
+./.git/objects/c6
+./.git/objects/ca
+./.git/objects/cc
+./.git/objects/ce
+./.git/objects/d0
+./.git/objects/d3
+./.git/objects/d5
+./.git/objects/da
+./.git/objects/db
+./.git/objects/dd
+./.git/objects/de
+./.git/objects/e0
+./.git/objects/e2
+./.git/objects/e5
+./.git/objects/e6
+./.git/objects/e9
+./.git/objects/eb
+./.git/objects/ee
+./.git/objects/ef
+./.git/objects/f0
+./.git/objects/f1
+./.git/objects/f2
+./.git/objects/f5
+./.git/objects/f7
+./.git/objects/f9
+./.git/objects/fb
+./.git/objects/info
+./.git/objects/pack
+./.git/ORIG_HEAD
+./.git/refs
+./.git/refs/heads
+./.git/refs/tags
+./lib
+./lib/datefmt.ts
+./lib/datefmt.ts.bak.1772539280
+./.next
+./next
+./next.config.ts
+./next-env.d.ts
+./node_modules
+./package.json
+./package-lock.freeze.json
+./package-lock.json
+./postcss.config.mjs
+./public
+./public/android-chrome-192x192.png
+./public/android-chrome-512x512.png
+./public/apple-touch-icon.png
+./public/bg-construction.jpg
+./public/favicon-128.png
+./public/favicon-16.png
+./public/favicon-16x16.png
+./public/favicon-256.png
+./public/favicon-32.png
+./public/favicon-32x32.png
+./public/favicon-48.png
+./public/favicon-64.png
+./public/favicon-base.png
+./public/favicon.ico
+./public/file.svg
+./public/globe.svg
+./public/logo.png
+./public/master-icon.png
+./public/next.svg
+./public/TeksysDPR_logo.png
+./public/teksys-logo.png
+./public/TeksysMain_logo.png
+./public/township-image.jpg
+./public/vercel.svg
+./public/window.svg
+./README.md
+./tsconfig.json
+./tsconfig.tsbuildinfo
+
+===== package.json =====
+{
+  "name": "dpr-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.19",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+
+===== tsconfig.json =====
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}
+
+===== next.config =====
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+
+===== app/layout.tsx =====
+import "./globals.css";
+import type { Metadata } from "next";
+import Header from "./components/Header";
+
+export const metadata: Metadata = {
+  title: "TeksysDPR",
+  description: "Execution-driven DPR management platform for construction projects",
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=20260301" },
+      { url: "/favicon-32.png?v=20260301", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16.png?v=20260301", sizes: "16x16", type: "image/png" }
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png?v=20260301", sizes: "180x180", type: "image/png" }
+    ],
+    other: [
+      { rel: "manifest", url: "/site.webmanifest?v=20260301" }
+    ]
+  }
+};
+
+
+
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className="m-0 font-sans">
+        <Header />
+        {children}
+      </body>
+    </html>
+  );
+}
+
+===== app/page.tsx =====
+"use client";
+
+import { useState } from "react";
+
+type FormState = {
+ name: string;
+ mobile: string;
+ email: string;
+ organisation: string;
+ message: string;
+};
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// India mobile: 10 digits, starts 6-9
+const MOBILE_RE = /^[6-9]\d{9}$/;
+
+export default function Home() {
+ const [form, setForm] = useState<FormState>({
+ name: "",
+ mobile: "",
+ email: "",
+ organisation: "",
+ message: "",
+ });
+
+ const [status, setStatus] = useState<string>("");
+ const [error, setError] = useState<string>("");
+
+ function validate(): string | null {
+ const name = form.name.trim();
+ const mobile = form.mobile.trim();
+ const email = form.email.trim();
+ const message = form.message.trim();
+
+ if (!name) return "Please enter your name.";
+ if (!mobile) return "Please enter mobile number.";
+ if (!MOBILE_RE.test(mobile)) return "Mobile number must be 10 digits and start with 6-9.";
+ if (!email) return "Please enter email id.";
+ if (!EMAIL_RE.test(email)) return "Please enter a valid email id.";
+ if (!message) return "Please enter message.";
+ return null;
+ }
+
+ async function submitContact(e: React.FormEvent) {
+ e.preventDefault();
+ setError("");
+ setStatus("");
+
+ const v = validate();
+ if (v) {
+ setError(v);
+ return;
+ }
+
+ setStatus("");
+
+ try {
+ const res = await fetch("/public/contact", {
+ method: "POST",
+ headers: { "Content-Type": "application/json" },
+ body: JSON.stringify({
+ ...form,
+ name: form.name.trim(),
+ mobile: form.mobile.trim(),
+ email: form.email.trim(),
+ organisation: form.organisation.trim(),
+ message: form.message.trim(),
+ }),
+ });
+
+ const data = await res.json().catch(() => ({} as any));
+
+ if (!res.ok) {
+ // Show backend/route error details if available
+ const details =
+ data?.details ||
+ data?.detail ||
+ data?.error ||
+ "Failed to send. Please try again.";
+ setError(String(details));
+ setStatus("");
+ return;
+ }
+
+ setStatus("✅ Thanks! We received your details. We will contact you shortly.");
+ setForm({ name: "", mobile: "", email: "", organisation: "", message: "" });
+ } catch (err: any) {
+ setError("Network error. Please try again.");
+ setStatus("");
+ }
+ }
+
+ return (
+    <div className="pageContent">
+ <div style={{ minHeight: "100vh", background: "#0b1f5e" }}>
+ {/* HERO */}
+ <section className="hero">
+ <img className="heroBg" src="/township-image.jpg" alt="Township Construction" />
+ <div className="heroOverlay" />
+
+  <div className="heroContent">
+    <div className="text-center">
+      <h1 style={{fontFamily:"Georgia, serif", fontWeight:900, letterSpacing:"0.12em", textTransform:"uppercase", lineHeight:1.1}}>
+        <div style={{fontSize:"clamp(24px,2.8vw,48px)", color:"#FFD87A", textShadow:"0 3px 0 #000, 0 10px 25px rgba(0,0,0,0.9)"}}>
+  DAILY PROGRESS MONITORING AND CONTROL SYSTEM FOR CONSTRUCTION PROJECTS
+</div>
+      </h1>
+    </div>
+    <p className="heroText text-center mx-auto">
+      A powerful execution-driven platform designed for modern construction projects. Plan activities, track daily targets, monitor manpower productivity, identify shortfalls instantly, and maintain schedule discipline.
+    </p>
+    <p className="heroText2 text-center mx-auto">
+      Connect Planning Teams and Site Engineers in real-time — and deliver projects with confidence.
+    </p>
+  </div>
+
+  </section>
+
+ {/* FOOTER CONTACT */}
+<footer className="footer">
+  <div className="footerWrap">
+    <div className="formCard">
+      <h2 className="footerTitle">Contact Us</h2>
+
+      <form onSubmit={submitContact} noValidate>
+        <div className="grid2 w-full">
+          <Field
+            label="Name"
+            value={form.name}
+            onChange={(v) => setForm({ ...form, name: v })}
+            required
+            autoComplete="name"
+          />
+
+          <Field
+            label="Mobile No."
+            value={form.mobile}
+            onChange={(v) => setForm({ ...form, mobile: v.replace(/[^\d]/g, "").slice(0, 10) })}
+            required
+            type="tel"
+            inputMode="numeric"
+            pattern="^[6-9]\\d{9}$"
+            maxLength={10}
+            placeholder="10-digit mobile"
+            autoComplete="tel"
+          />
+
+          <Field
+            label="Email Id"
+            value={form.email}
+            onChange={(v) => setForm({ ...form, email: v })}
+            required
+            type="email"
+            placeholder="name@company.com"
+            autoComplete="email"
+          />
+
+          <Field
+            label="Organisation"
+            value={form.organisation}
+            onChange={(v) => setForm({ ...form, organisation: v })}
+            placeholder="Company / Site"
+          />
+        </div>
+
+        <label className="lbl block mt-4 mb-2">Message</label>
+        <textarea
+          className="ta w-full"
+          value={form.message}
+          onChange={(e) => setForm({ ...form, message: e.target.value })}
+          rows={4}
+          required
+        />
+
+        <div className="btnRow"><button
+  type="submit"
+  className="btnSend w-full mt-3 py-3 rounded-xl bg-[#d4a24c] text-[#0b1f5e] font-extrabold hover:opacity-90 transition"
+>
+  Send
+</button></div>
+
+        {error ? <div className="statusErr">{error}</div> : null}
+        {status ? <div className="statusOk">{status}</div> : null}
+      </form>
+    </div>
+
+    <div className="footerInfo">
+      <h3 className="footerInfoTitle">For Subscription & Demo</h3>
+      <p className="footerText">
+        Send us your details. We’ll get back to you for subscription plans, onboarding, and demo.
+      </p>
+      <p className="footerText">
+      </p>
+    </div>
+  </div>
+
+  
+
+<div className="copyright">
+    <img src="/TeksysMain_logo.png" className="h-6 inline-block mr-2 align-middle w-auto" style={{ height: 24, width: "auto", maxWidth: 120, display: "inline-block", verticalAlign: "middle" }} /> © 2026 Teksys Enterprises Pvt. Ltd. PUNE (India). DAILY PROGRESS MONITORING AND CONTROL SYSTEM
+  </div>
+</footer>
+
+<style jsx global>{`
+  /* --- Mobile/iPad safety fixes --- */
+  html, body { width: 100%; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  .pageContent img { max-width: 100%; height: auto; }
+  .hero { min-height: 78svh; } /* iOS-friendly viewport height */
+  @supports not (height: 100svh) {
+    .hero { min-height: 78vh; }
+  }
+
+ .hero{
+ position:relative;
+ min-height: 78vh;
+ width:100%;
+ overflow:hidden;
+ }
+ .heroBg{
+ position:absolute;
+
+===== .env.local =====
+BACKEND_URL=http://127.0.0.1:8101
+
+===== GREP =====
+app/projects/page.tsx.bak.add-schedule-ui.1772539296:32:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.add-schedule-ui.1772539296:38:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.add-schedule-ui.1772539296:80:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.add-schedule-ui.1772539296:96:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.fix_taskrows.1772543017:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.fix_taskrows.1772543017:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_taskrows.1772543017:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_taskrows.1772543017:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.fix_taskrows.1772543017:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.fix_taskrows.1772543017:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.schedule.1772541668:44:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.schedule.1772541668:50:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.schedule.1772541668:92:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.schedule.1772541668:108:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.fix_card.1772542417:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.fix_card.1772542417:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_card.1772542417:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_card.1772542417:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.fix_card.1772542417:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.fix_card.1772542417:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.schedule_fix.1772541917:44:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.schedule_fix.1772541917:50:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.schedule_fix.1772541917:92:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.schedule_fix.1772541917:108:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.fix_onchange_close.1772542830:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.fix_onchange_close.1772542830:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_onchange_close.1772542830:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_onchange_close.1772542830:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.fix_onchange_close.1772542830:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.fix_onchange_close.1772542830:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.add-schedule-ui.1772539355:44:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.add-schedule-ui.1772539355:50:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.add-schedule-ui.1772539355:92:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.add-schedule-ui.1772539355:108:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.fix_braces2.1772542695:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.fix_braces2.1772542695:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_braces2.1772542695:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_braces2.1772542695:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.fix_braces2.1772542695:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.fix_braces2.1772542695:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.before_split.1772543571:40:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.before_split.1772543571:56:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.before_split.1772543571:62:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.before_split.1772543571:71:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.before_split.1772543571:132:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.before_split.1772543571:148:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.fix_card.1772542469:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.fix_card.1772542469:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_card.1772542469:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_card.1772542469:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.fix_card.1772542469:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.fix_card.1772542469:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.fix_braces.1772542580:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.fix_braces.1772542580:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_braces.1772542580:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_braces.1772542580:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.fix_braces.1772542580:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.fix_braces.1772542580:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.force_dynamic.1772543392:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.force_dynamic.1772543392:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.force_dynamic.1772543392:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.force_dynamic.1772543392:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.force_dynamic.1772543392:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.force_dynamic.1772543392:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.schedule.1772541722:44:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.schedule.1772541722:50:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.schedule.1772541722:92:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.schedule.1772541722:108:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.insert_card.1772542310:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.insert_card.1772542310:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.insert_card.1772542310:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.insert_card.1772542310:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.insert_card.1772542310:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.insert_card.1772542310:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/ProjectsClient.tsx:39:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/ProjectsClient.tsx:55:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/ProjectsClient.tsx:61:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/ProjectsClient.tsx:70:      headers: { Authorization: `Bearer ${t}` },
+app/projects/ProjectsClient.tsx:131:        Authorization: `Bearer ${token}`,
+app/projects/ProjectsClient.tsx:147:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.fix_select_clean.1772542951:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.fix_select_clean.1772542951:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_select_clean.1772542951:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_select_clean.1772542951:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.fix_select_clean.1772542951:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.fix_select_clean.1772542951:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.fix_braces3.1772542762:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.fix_braces3.1772542762:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_braces3.1772542762:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_braces3.1772542762:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.fix_braces3.1772542762:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.fix_braces3.1772542762:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.add-schedule-ui.1772539498:44:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.add-schedule-ui.1772539498:50:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.add-schedule-ui.1772539498:92:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.add-schedule-ui.1772539498:108:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.fix_last3.1772543085:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.fix_last3.1772543085:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_last3.1772543085:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_last3.1772543085:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.fix_last3.1772543085:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.fix_last3.1772543085:146:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.schedule_fix2.1772542102:44:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.schedule_fix2.1772542102:50:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.schedule_fix2.1772542102:92:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.schedule_fix2.1772542102:108:    const t = localStorage.getItem("dpr_token") || "";
+app/projects/page.tsx.bak.fix_onchange_close.1772542889:38:    const saved = (typeof window !== "undefined" && localStorage.getItem("dpr_date_fmt")) || "";
+app/projects/page.tsx.bak.fix_onchange_close.1772542889:54:    const r = await fetch("/api/proxy/auth/me", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_onchange_close.1772542889:60:    const r = await fetch("/api/proxy/projects", { headers: { Authorization: `Bearer ${t}` } });
+app/projects/page.tsx.bak.fix_onchange_close.1772542889:69:      headers: { Authorization: `Bearer ${t}` },
+app/projects/page.tsx.bak.fix_onchange_close.1772542889:130:        Authorization: `Bearer ${token}`,
+app/projects/page.tsx.bak.fix_onchange_close.1772542889:146:    const t = localStorage.getItem("dpr_token") || "";
+app/components/Header.tsx.bak_hide_tagline.2026-02-27_111524:14:      const t = localStorage.getItem("dpr_token") || "";
+app/components/Header.tsx:14:      const t = localStorage.getItem("dpr_token") || "";
+app/components/AuthGuard.tsx:12:    const token = localStorage.getItem("dpr_token");

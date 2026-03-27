@@ -1,0 +1,471 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OrgType {
+  INTERNAL
+  CLIENT
+}
+
+enum ProjectStatus {
+  DRAFT
+  ACTIVE
+  ON_HOLD
+  COMPLETED
+  ARCHIVED
+}
+
+enum FileCategory {
+  SOURCE_CAD
+  SOURCE_DOC
+  BIM_MODEL
+  COORDINATION
+  COST
+  EXPORT
+  OTHER
+}
+
+enum FileProcessingStatus {
+  UPLOADED
+  PROCESSING
+  READY
+  FAILED
+  ARCHIVED
+}
+
+enum ConversionStage {
+  UPLOADED
+  UNDER_REVIEW
+  SCOPE_APPROVED
+  IN_CONVERSION
+  QA_CHECK
+  CLASH_REVIEW
+  COST_ESTIMATION
+  DELIVERED
+  REVISION_REQUESTED
+  CLOSED
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  BLOCKED
+  IN_REVIEW
+  DONE
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  REVOKED
+}
+
+enum DeliverableStatus {
+  DRAFT
+  SUBMITTED
+  APPROVED
+  REJECTED
+}
+
+enum ClashSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum NotificationStatus {
+  QUEUED
+  SENT
+  READ
+  FAILED
+}
+
+enum NotificationChannel {
+  IN_APP
+  EMAIL
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  UPLOAD
+  DOWNLOAD
+  SUBMIT
+  APPROVE
+  REJECT
+  ASSIGN
+  COMMENT
+}
+
+model User {
+  id               String         @id @default(uuid())
+  email            String         @unique
+  fullName         String
+  passwordHash     String
+  isActive         Boolean        @default(true)
+  organizationId   String?
+  organization     Organization?  @relation(fields: [organizationId], references: [id])
+  roles            UserRole[]
+  projectMembers   ProjectMember[]
+  createdProjects  Project[]      @relation("ProjectCreatedBy")
+  uploadedFiles    FileAsset[]    @relation("FileUploadedBy")
+  fileVersions     FileVersion[]  @relation("VersionUploadedBy")
+  requestsCreated  ConversionRequest[] @relation("RequestCreatedBy")
+  tasksAssigned    Task[]         @relation("TaskAssignee")
+  comments         Comment[]
+  notifications    Notification[]
+  activityLogs     ActivityLog[]
+  approvalsCreated Approval[]     @relation("ApprovalCreatedBy")
+  approvalsActed   Approval[]     @relation("ApprovalActedBy")
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+}
+
+model Role {
+  id          Int              @id @default(autoincrement())
+  code        String           @unique
+  name        String
+  users       UserRole[]
+  permissions RolePermission[]
+}
+
+model Permission {
+  id          Int              @id @default(autoincrement())
+  code        String           @unique
+  description String?
+  roles       RolePermission[]
+}
+
+model UserRole {
+  userId String
+  roleId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+}
+
+model RolePermission {
+  roleId       Int
+  permissionId Int
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+}
+
+model Organization {
+  id           String   @id @default(uuid())
+  name         String
+  code         String   @unique
+  type         OrgType
+  contactName  String?
+  contactEmail String?
+  contactPhone String?
+  users        User[]
+  projects     Project[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Project {
+  id                 String             @id @default(uuid())
+  name               String
+  code               String             @unique
+  location           String?
+  status             ProjectStatus      @default(DRAFT)
+  clientOrgId        String
+  description        String?
+  startDate          DateTime?
+  endDate            DateTime?
+  createdById        String
+  clientOrg          Organization       @relation(fields: [clientOrgId], references: [id])
+  createdBy          User               @relation("ProjectCreatedBy", fields: [createdById], references: [id])
+  members            ProjectMember[]
+  files              FileAsset[]
+  conversionRequests ConversionRequest[]
+  tasks              Task[]
+  deliverables       Deliverable[]
+  clashReports       ClashReport[]
+  costEstimations    CostEstimation[]
+  approvals          Approval[]
+  comments           Comment[]
+  activityLogs       ActivityLog[]
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  @@index([clientOrgId, status])
+}
+
+model ProjectMember {
+  id        String   @id @default(uuid())
+  projectId String
+  userId    String
+  title     String?
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([projectId, userId])
+}
+
+model FileAsset {
+  id               String               @id @default(uuid())
+  projectId        String
+  uploadedById     String
+  category         FileCategory
+  name             String
+  originalName     String
+  extension        String?
+  mimeType         String?
+  sizeBytes        BigInt?
+  status           FileProcessingStatus @default(UPLOADED)
+  currentVersionId String?
+  project          Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  uploadedBy       User                 @relation("FileUploadedBy", fields: [uploadedById], references: [id])
+  currentVersion   FileVersion?         @relation("CurrentVersion", fields: [currentVersionId], references: [id])
+  versions         FileVersion[]        @relation("FileVersions")
+  requestLinks     ConversionRequestFile[]
+  deliverables     Deliverable[]
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+
+  @@index([projectId, category, createdAt])
+}
+
+model FileVersion {
+  id            String    @id @default(uuid())
+  fileAssetId   String
+  versionNo     Int
+  storageDriver String
+  storageKey    String
+  checksum      String?
+  uploadedById  String
+  notes         String?
+  fileAsset     FileAsset @relation("FileVersions", fields: [fileAssetId], references: [id], onDelete: Cascade)
+  uploadedBy    User      @relation("VersionUploadedBy", fields: [uploadedById], references: [id])
+  currentOf     FileAsset[] @relation("CurrentVersion")
+  createdAt     DateTime  @default(now())
+
+  @@unique([fileAssetId, versionNo])
+}
+
+model ConversionRequest {
+  id                String          @id @default(uuid())
+  projectId         String
+  title             String
+  description       String?
+  stage             ConversionStage @default(UPLOADED)
+  dueDate           DateTime?
+  createdById       String
+  assignedManagerId String?
+  assignedEngineerId String?
+  scopeApprovedAt   DateTime?
+  deliveredAt       DateTime?
+  closedAt          DateTime?
+  project           Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdBy         User            @relation("RequestCreatedBy", fields: [createdById], references: [id])
+  files             ConversionRequestFile[]
+  tasks             Task[]
+  comments          Comment[]
+  approvals         Approval[]
+  deliverables      Deliverable[]
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@index([projectId, stage, dueDate])
+}
+
+model ConversionRequestFile {
+  conversionRequestId String
+  fileAssetId         String
+  conversionRequest   ConversionRequest @relation(fields: [conversionRequestId], references: [id], onDelete: Cascade)
+  fileAsset           FileAsset         @relation(fields: [fileAssetId], references: [id], onDelete: Cascade)
+
+  @@id([conversionRequestId, fileAssetId])
+}
+
+model Task {
+  id                  String      @id @default(uuid())
+  projectId           String
+  conversionRequestId String?
+  title               String
+  description         String?
+  status              TaskStatus  @default(TODO)
+  priority            Priority    @default(MEDIUM)
+  dueDate             DateTime?
+  assigneeId          String?
+  project             Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  conversionRequest   ConversionRequest? @relation(fields: [conversionRequestId], references: [id], onDelete: SetNull)
+  assignee            User?       @relation("TaskAssignee", fields: [assigneeId], references: [id])
+  comments            Comment[]
+  approvals           Approval[]
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  @@index([projectId, status, dueDate])
+}
+
+model Comment {
+  id                  String   @id @default(uuid())
+  authorId            String
+  projectId           String?
+  conversionRequestId String?
+  taskId              String?
+  body                String
+  author              User     @relation(fields: [authorId], references: [id])
+  project             Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  conversionRequest   ConversionRequest? @relation(fields: [conversionRequestId], references: [id], onDelete: SetNull)
+  task                Task?    @relation(fields: [taskId], references: [id], onDelete: SetNull)
+  createdAt           DateTime @default(now())
+}
+
+model Deliverable {
+  id                  String            @id @default(uuid())
+  projectId           String
+  conversionRequestId String?
+  fileAssetId         String?
+  title               String
+  versionLabel        String
+  status              DeliverableStatus @default(DRAFT)
+  submittedAt         DateTime?
+  approvedAt          DateTime?
+  notes               String?
+  project             Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  conversionRequest   ConversionRequest? @relation(fields: [conversionRequestId], references: [id], onDelete: SetNull)
+  fileAsset           FileAsset?        @relation(fields: [fileAssetId], references: [id], onDelete: SetNull)
+  approvals           Approval[]
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+}
+
+model ClashReport {
+  id              String   @id @default(uuid())
+  projectId       String
+  title           String
+  disciplineA     String
+  disciplineB     String
+  summary         String?
+  totalClashes    Int      @default(0)
+  openClashes     Int      @default(0)
+  resolvedClashes Int      @default(0)
+  reportDate      DateTime
+  project         Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  issues          ClashIssue[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model ClashIssue {
+  id             String        @id @default(uuid())
+  clashReportId  String
+  title          String
+  location       String?
+  severity       ClashSeverity
+  status         String
+  assignedTo     String?
+  dueDate        DateTime?
+  resolutionNote String?
+  clashReport    ClashReport   @relation(fields: [clashReportId], references: [id], onDelete: Cascade)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model CostEstimation {
+  id               String   @id @default(uuid())
+  projectId        String
+  name             String
+  currency         String   @default("INR")
+  totalAmount      Decimal  @default(0)
+  quantitySnapshot Json?
+  project          Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  lines            CostEstimationLine[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model CostEstimationLine {
+  id               String   @id @default(uuid())
+  costEstimationId String
+  itemCode         String?
+  description      String
+  unit             String?
+  quantity         Decimal  @default(0)
+  rate             Decimal  @default(0)
+  amount           Decimal  @default(0)
+  costEstimation   CostEstimation @relation(fields: [costEstimationId], references: [id], onDelete: Cascade)
+}
+
+model Approval {
+  id              String         @id @default(uuid())
+  projectId       String?
+  taskId          String?
+  conversionRequestId String?
+  deliverableId   String?
+  entityType      String
+  entityId        String
+  status          ApprovalStatus @default(PENDING)
+  requestedById   String
+  actedById       String?
+  remarks         String?
+  requestedAt     DateTime       @default(now())
+  actedAt         DateTime?
+  project         Project?       @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  task            Task?          @relation(fields: [taskId], references: [id], onDelete: SetNull)
+  conversionRequest ConversionRequest? @relation(fields: [conversionRequestId], references: [id], onDelete: SetNull)
+  deliverable     Deliverable?   @relation(fields: [deliverableId], references: [id], onDelete: SetNull)
+  requestedBy     User           @relation("ApprovalCreatedBy", fields: [requestedById], references: [id])
+  actedBy         User?          @relation("ApprovalActedBy", fields: [actedById], references: [id])
+
+  @@index([entityType, entityId, status])
+}
+
+model Notification {
+  id        String              @id @default(uuid())
+  userId    String
+  title     String
+  message   String
+  channel   NotificationChannel @default(IN_APP)
+  status    NotificationStatus  @default(QUEUED)
+  link      String?
+  user      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime            @default(now())
+  sentAt    DateTime?
+  readAt    DateTime?
+
+  @@index([userId, status, createdAt])
+}
+
+model ActivityLog {
+  id         String      @id @default(uuid())
+  userId     String?
+  action     AuditAction
+  entityType String
+  entityId   String
+  projectId  String?
+  meta       Json?
+  ipAddress  String?
+  userAgent  String?
+  user       User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  project    Project?    @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  createdAt  DateTime    @default(now())
+
+  @@index([entityType, entityId, createdAt])
+}

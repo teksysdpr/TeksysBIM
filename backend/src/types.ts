@@ -1,0 +1,11 @@
+export type ConversionStage =
+  | "UPLOADED"
+  | "UNDER_REVIEW"
+  | "SCOPE_APPROVED"
+  | "IN_CONVERSION"
+  | "QA_CHECK"
+  | "CLASH_REVIEW"
+  | "COST_ESTIMATION"
+  | "DELIVERED"
+  | "REVISION_REQUESTED"
+  | "CLOSED";
