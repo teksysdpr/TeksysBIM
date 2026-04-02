@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { getLandingPathFromAuthContext } from "@/lib/landing";
 import { saveVerifiedSession } from "@/lib/storage";
+import LaunchNotice from "./LaunchNotice";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -189,6 +190,12 @@ export default function LoginPage() {
           </div>
         </section>
       </div>
+      <LaunchNotice
+        portalName="BIM Portal"
+        launchMonth="May 2026"
+        storageKey="bim_login_launch_notice_v2"
+        themeVariant="bim"
+      />
     </main>
   );
 }

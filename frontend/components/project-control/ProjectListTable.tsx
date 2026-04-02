@@ -20,22 +20,22 @@ export default function ProjectListTable({
   onStartEdit,
 }: Props) {
   return (
-    <div className="overflow-x-auto rounded-2xl border border-[#D7BDA9] bg-[#FFF9F4] shadow-[0_8px_24px_rgba(91,52,33,0.08)]">
+    <div className="overflow-x-auto rounded-2xl border border-[#3f2d1a] bg-[#0f0905] shadow-[0_8px_24px_rgba(0,0,0,0.35)]">
       <table className="min-w-full">
-        <thead className="bg-[linear-gradient(180deg,#E7D0BE_0%,#E2C5B0_100%)] text-left">
+        <thead className="bg-[#1a0f06] text-left">
           <tr>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Project Name</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Project Code</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Client Name</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Location</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Status</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Action</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Project Name</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Project Code</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Client Name</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Location</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Status</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Action</th>
           </tr>
         </thead>
         <tbody>
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={6} className="px-4 py-6 text-center text-sm text-[#7A5C4D]">
+              <td colSpan={6} className="px-4 py-6 text-center text-sm text-[#8a6e4e]">
                 No projects found.
               </td>
             </tr>
@@ -46,18 +46,18 @@ export default function ProjectListTable({
               return (
                 <tr
                   key={row.id}
-                  className={`border-t border-[#E9D9CC] ${isSelected ? "bg-[#F8EBDD]" : "bg-[#FFF9F4]"}`}
+                  className={`border-t border-[#2b1e12] ${isSelected ? "bg-[#160f08]" : "bg-[#110e0a]"}`}
                 >
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     <div className="flex items-center gap-2">
                       {projectImageMap[row.id] ? (
                         <img
                           src={projectImageMap[row.id]}
                           alt={row.project_name}
-                          className="h-7 w-7 rounded-md border border-[#D8C2B5] object-cover"
+                          className="h-7 w-7 rounded-md border border-[#2b1e12] object-cover"
                         />
                       ) : (
-                        <span className="flex h-7 w-7 items-center justify-center rounded-md border border-[#D8C2B5] bg-[#F6E8DC] text-[10px] font-bold text-[#7A5C4D]">
+                        <span className="flex h-7 w-7 items-center justify-center rounded-md border border-[#2b1e12] bg-[#1a0f06] text-[10px] font-bold text-[#8a6e4e]">
                           {String(row.project_name || "P").trim().charAt(0).toUpperCase()}
                         </span>
                       )}
@@ -65,19 +65,19 @@ export default function ProjectListTable({
                     </div>
                   </td>
 
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     {row.project_code}
                   </td>
 
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     {row.client_name || "-"}
                   </td>
 
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     {row.location || "-"}
                   </td>
 
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     {formatProjectStatus(row.status)}
                   </td>
 
@@ -87,7 +87,7 @@ export default function ProjectListTable({
                         type="button"
                         onClick={() => onDelete(row)}
                         disabled={deletingProjectId === row.id}
-                        className="rounded-xl border border-[#D8B7A6] bg-[#F6E8DC] px-3 py-2 text-xs font-semibold text-[#8A3C2A] shadow-[0_4px_0_#D8B7A6] disabled:opacity-50"
+                        className="rounded-xl border border-red-900/60 bg-red-950/25 px-3 py-2 text-xs font-semibold text-[#f87171] disabled:opacity-50"
                       >
                         {deletingProjectId === row.id ? "Deleting..." : "Delete"}
                       </button>
@@ -95,7 +95,7 @@ export default function ProjectListTable({
                       <button
                         type="button"
                         onClick={() => onStartEdit(row)}
-                        className="rounded-xl border border-[#B58C72] bg-[#E7D0BE] px-3 py-2 text-xs font-semibold text-[#5B3421] shadow-[0_4px_0_#C5A48D]"
+                        className="rounded-xl border border-[#3f2d1a] bg-[#1a120b] px-3 py-2 text-xs font-semibold text-[#f0c27e] hover:bg-[#25180d]"
                       >
                         Edit
                       </button>
@@ -103,7 +103,7 @@ export default function ProjectListTable({
                       <button
                         type="button"
                         onClick={() => onDisplaySchedules(row)}
-                        className="rounded-xl border border-[#6F4A36] bg-[#8B5E3C] px-3 py-2 text-xs font-semibold text-white shadow-[0_4px_0_#5B3421]"
+                        className="rounded-xl border border-[#6b3e14] bg-[#d4933c] px-3 py-2 text-xs font-semibold text-[#1a0f06] hover:bg-[#c08030]"
                       >
                         Manage Schedule
                       </button>

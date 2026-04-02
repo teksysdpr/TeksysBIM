@@ -99,7 +99,7 @@ async function proxy(req: NextRequest, ctx: Ctx) {
     return handleLocalIntelligenceAnalyze(req);
   }
 
-  const url = `${BACKEND}/${path.join("/")}`;
+  const url = `${BACKEND}/${path.join("/")}${req.nextUrl.search}`;
 
   const headers = new Headers();
   const contentType = req.headers.get("content-type");

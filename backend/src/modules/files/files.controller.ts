@@ -10,6 +10,7 @@ import { mockFiles } from "../../data/mock.js";
 
 const allowedExtensions = new Set([
   ".dwg",
+  ".dxf",
   ".pdf",
   ".ifc",
   ".rvt",
@@ -96,7 +97,7 @@ filesRouter.post(
       storageKey: req.file.filename,
       sizeBytes: req.file.size,
     };
-    mockFiles.push(file as any);
+    mockFiles.push(file as (typeof mockFiles)[number]);
     res.status(201).json({ data: file });
   }
 );

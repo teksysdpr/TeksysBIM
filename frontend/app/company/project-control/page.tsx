@@ -43,11 +43,11 @@ function SectionCard({
   rightAction?: React.ReactNode;
 }) {
   return (
-    <section className="rounded-3xl border border-[#D7BDA9] bg-[#F3E3D3] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.18)] md:p-6">
-      <div className="mb-4 flex flex-col gap-3 border-b border-[#D6B9A3] pb-4 md:flex-row md:items-center md:justify-between">
+    <section className="rounded-3xl border border-[#2b1e12] bg-[#110e0a] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.35)] md:p-6">
+      <div className="mb-4 flex flex-col gap-3 border-b border-[#3f2d1a] pb-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-lg font-bold text-[#4A2C1D]">{title}</h2>
-          {subtitle ? <p className="mt-1 text-sm text-[#6A4937]">{subtitle}</p> : null}
+          <h2 className="text-lg font-bold text-[#fff3de]">{title}</h2>
+          {subtitle ? <p className="mt-1 text-sm text-[#d0b894]">{subtitle}</p> : null}
         </div>
         {rightAction ? <div>{rightAction}</div> : null}
       </div>
@@ -385,30 +385,30 @@ export default function ProjectControlPage() {
     : "Schedule Summary for Selected Project";
 
   return (
-    <div className="min-h-screen bg-[#4A2C1D] px-4 py-6 md:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#0a0806] px-4 py-6 md:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-[1400px] space-y-6">
         <CompanyPageHeader />
 
         <div className="flex items-center justify-between gap-4">
           <Link
             href="/company/dashboard"
-            className="inline-flex items-center rounded-xl border border-[#D7BDA9] bg-[#F3E3D3] px-4 py-2 text-sm font-semibold text-[#4A2C1D] shadow-sm hover:bg-[#EAD7C4]"
+            className="inline-flex items-center rounded-xl border border-[#3f2d1a] bg-[#1a120b] px-4 py-2 text-sm font-semibold text-[#f0c27e] shadow-sm hover:bg-[#25180d]"
           >
             ← Back to Company Dashboard
           </Link>
         </div>
 
         <div className="pt-1">
-          <h1 className="text-left text-2xl font-bold text-[#FFF4EA] md:text-3xl">
+          <h1 className="text-left text-2xl font-bold text-[#fff3de] md:text-3xl">
             Project Control
           </h1>
-          <p className="mt-2 text-sm text-[#F3E3D3] md:text-base">
+          <p className="mt-2 text-sm text-[#d0b894] md:text-base">
             Project summary, project list, and schedule view for the selected project.
           </p>
         </div>
 
         {pageError ? (
-          <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <div className="rounded-2xl border border-red-900/60 bg-red-950/25 px-4 py-3 text-sm text-[#f87171]">
             {pageError}
           </div>
         ) : null}
@@ -442,7 +442,7 @@ export default function ProjectControlPage() {
           subtitle="Use Manage Schedule to display the schedules for a particular project."
         >
           {loading ? (
-            <div className="rounded-2xl border border-[#D6B9A3] bg-[#EED9C7] px-4 py-6 text-sm text-[#6A4937]">
+            <div className="rounded-2xl border border-[#2b1e12] bg-[#110e0a] px-4 py-6 text-sm text-[#8a6e4e]">
               Loading project control data...
             </div>
           ) : (
@@ -464,7 +464,7 @@ export default function ProjectControlPage() {
                     setEditingProject(null);
                     setIsAddProjectOpen(true);
                   }}
-                  className="rounded-xl border border-[#6F4A36] bg-[#8B5E3C] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_5px_0_#5B3421]"
+                  className="rounded-xl border border-[#6b3e14] bg-[#d4933c] px-5 py-2.5 text-sm font-semibold text-[#1a0f06] hover:bg-[#c08030]"
                 >
                   Create Project
                 </button>
@@ -496,7 +496,7 @@ export default function ProjectControlPage() {
               <button
                 type="button"
                 onClick={() => setIsAddScheduleOpen(true)}
-                className="rounded-2xl border border-[#6F4A36] bg-[linear-gradient(180deg,#A66C44_0%,#8B5E3C_100%)] px-6 py-3 text-sm font-bold text-white shadow-[0_7px_0_#5B3421] transition hover:translate-y-[1px] hover:shadow-[0_6px_0_#5B3421]"
+                className="rounded-xl border border-[#6b3e14] bg-[#d4933c] px-6 py-3 text-sm font-bold text-[#1a0f06] transition hover:bg-[#c08030]"
               >
                 Add Schedule
               </button>

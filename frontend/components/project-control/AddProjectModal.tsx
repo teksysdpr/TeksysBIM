@@ -91,12 +91,12 @@ export default function AddProjectModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-      <div className="w-full max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl">
+      <div className="w-full max-w-3xl rounded-3xl border border-[#3f2d1a] bg-[#1a0f06] p-6 shadow-2xl">
         <div className="mb-4">
-          <h2 className="text-xl font-bold text-[#5B3421]">
+          <h2 className="text-xl font-bold text-[#fff3de]">
             {mode === "edit" ? "Edit Project" : "Create Project"}
           </h2>
-          <p className="mt-1 text-sm text-[#7A5C4D]">
+          <p className="mt-1 text-sm text-[#d0b894]">
             {mode === "edit" ? "Update project details." : "Add a new project record."}
           </p>
         </div>
@@ -104,67 +104,67 @@ export default function AddProjectModal({
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <label className="mb-1 block text-sm font-medium text-[#5B3421]">Project Name</label>
+              <label className="mb-1 block text-sm font-medium text-[#d0b894]">Project Name</label>
               <input
                 value={form.project_name}
                 onChange={(e) => updateField("project_name", e.target.value)}
-                className="w-full rounded-xl border border-[#D8C2B5] px-3 py-2 text-sm outline-none"
+                className="w-full rounded-xl border border-[#3f2d1a] px-3 py-2 text-sm outline-none"
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-[#5B3421]">Project Code</label>
+              <label className="mb-1 block text-sm font-medium text-[#d0b894]">Project Code</label>
               <input
                 value={form.project_code}
                 onChange={(e) => updateField("project_code", e.target.value)}
-                className="w-full rounded-xl border border-[#D8C2B5] px-3 py-2 text-sm outline-none"
+                className="w-full rounded-xl border border-[#3f2d1a] px-3 py-2 text-sm outline-none"
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-[#5B3421]">Client Name</label>
+              <label className="mb-1 block text-sm font-medium text-[#d0b894]">Client Name</label>
               <input
                 value={form.client_name || ""}
                 onChange={(e) => updateField("client_name", e.target.value)}
-                className="w-full rounded-xl border border-[#D8C2B5] px-3 py-2 text-sm outline-none"
+                className="w-full rounded-xl border border-[#3f2d1a] px-3 py-2 text-sm outline-none"
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-[#5B3421]">Location</label>
+              <label className="mb-1 block text-sm font-medium text-[#d0b894]">Location</label>
               <input
                 value={form.location || ""}
                 onChange={(e) => updateField("location", e.target.value)}
-                className="w-full rounded-xl border border-[#D8C2B5] px-3 py-2 text-sm outline-none"
+                className="w-full rounded-xl border border-[#3f2d1a] px-3 py-2 text-sm outline-none"
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-[#5B3421]">Start Date</label>
+              <label className="mb-1 block text-sm font-medium text-[#d0b894]">Start Date</label>
               <input
                 type="date"
                 value={form.start_date || ""}
                 onChange={(e) => updateField("start_date", e.target.value)}
-                className="w-full rounded-xl border border-[#D8C2B5] px-3 py-2 text-sm outline-none"
+                className="w-full rounded-xl border border-[#3f2d1a] px-3 py-2 text-sm outline-none"
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-[#5B3421]">End Date</label>
+              <label className="mb-1 block text-sm font-medium text-[#d0b894]">End Date</label>
               <input
                 type="date"
                 value={form.end_date || ""}
                 onChange={(e) => updateField("end_date", e.target.value)}
-                className="w-full rounded-xl border border-[#D8C2B5] px-3 py-2 text-sm outline-none"
+                className="w-full rounded-xl border border-[#3f2d1a] px-3 py-2 text-sm outline-none"
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-[#5B3421]">Status</label>
+              <label className="mb-1 block text-sm font-medium text-[#d0b894]">Status</label>
               <select
                 value={form.status}
                 onChange={(e) => updateField("status", e.target.value)}
-                className="w-full rounded-xl border border-[#D8C2B5] px-3 py-2 text-sm outline-none"
+                className="w-full rounded-xl border border-[#3f2d1a] px-3 py-2 text-sm outline-none"
               >
                 <option value="Active">Active</option>
                 <option value="On-Hold">On-Hold</option>
@@ -173,12 +173,12 @@ export default function AddProjectModal({
             </div>
 
             <div className="md:col-span-2">
-              <label className="mb-1 block text-sm font-medium text-[#5B3421]">Remarks</label>
+              <label className="mb-1 block text-sm font-medium text-[#d0b894]">Remarks</label>
               <textarea
                 value={form.remarks || ""}
                 onChange={(e) => updateField("remarks", e.target.value)}
                 rows={3}
-                className="w-full rounded-xl border border-[#D8C2B5] px-3 py-2 text-sm outline-none"
+                className="w-full rounded-xl border border-[#3f2d1a] px-3 py-2 text-sm outline-none"
               />
             </div>
           </div>
@@ -187,14 +187,14 @@ export default function AddProjectModal({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl border border-[#D8B7A6] bg-white px-4 py-2 text-sm font-semibold text-[#7A5C4D]"
+              className="rounded-xl border border-[#3f2d1a] bg-transparent px-4 py-2 text-sm font-semibold text-[#d0b894] hover:bg-[#1a120b]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="rounded-xl border border-[#B58C72] bg-[#E7D0BE] px-4 py-2 text-sm font-semibold text-[#5B3421] shadow-[0_4px_0_#C5A48D] disabled:opacity-60"
+              className="rounded-xl border border-[#6b3e14] bg-[#d4933c] px-4 py-2 text-sm font-semibold text-[#1a0f06] hover:bg-[#c08030] disabled:opacity-60"
             >
               {saving ? "Saving..." : "Save"}
             </button>

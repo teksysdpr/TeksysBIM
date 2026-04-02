@@ -9,11 +9,11 @@ type Props = {
 
 function Card({ title, value }: { title: string; value: number }) {
   return (
-    <div className="rounded-2xl border border-[#D7BDA9] bg-[#FFF8F1] p-4 text-center shadow-sm">
-      <div className="text-xs font-semibold uppercase tracking-wide text-[#8A5A3B]">
+    <div className="rounded-2xl border border-[#2b1e12] bg-[#110e0a] p-4 text-center shadow-[0_4px_16px_rgba(0,0,0,0.3)]">
+      <div className="text-xs font-semibold uppercase tracking-wide text-[#8a6e4e]">
         {title}
       </div>
-      <div className="mt-2 text-2xl font-bold text-[#4A2C1D]">{value}</div>
+      <div className="mt-2 text-2xl font-bold text-[#fff3de]">{value}</div>
     </div>
   );
 }

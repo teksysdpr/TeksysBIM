@@ -8,12 +8,11 @@ function getAccessToken(): string | null {
 
   return (
     localStorage.getItem("dpr_access_token") ||
-    localStorage.getItem("access_token") ||
-    localStorage.getItem("token")
+    localStorage.getItem("dpr_token")
   );
 }
 
-export async function apiRequest<T = any>(
+export async function apiRequest<T = unknown>(
   path: string,
   options: RequestInit = {}
 ): Promise<T> {
@@ -33,7 +32,7 @@ export async function apiRequest<T = any>(
   });
 
   const raw = await response.text();
-  let data: any = null;
+  let data: unknown = null;
 
   try {
     data = raw ? JSON.parse(raw) : null;
@@ -43,7 +42,10 @@ export async function apiRequest<T = any>(
 
   if (!response.ok) {
     const message =
-      (data && typeof data === "object" && (data.message || data.detail)) ||
+      (data && typeof data === "object" && data !== null &&
+        ("message" in data || "detail" in data)
+        ? String((data as Record<string, unknown>).message ?? (data as Record<string, unknown>).detail)
+        : null) ??
       `Request failed with status ${response.status}`;
     throw new Error(message);
   }

@@ -43,7 +43,7 @@ function QuickActionButton({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className="rounded-lg border border-[#CDB4A5] bg-[#F7EEE8] px-2.5 py-1.5 text-xs font-semibold text-[#6D4C3D] shadow-sm disabled:opacity-50"
+      className="rounded-lg border border-[#2b1e12] bg-[#1a0f06] px-2.5 py-1.5 text-xs font-semibold text-[#d0b894] hover:bg-[#25180d] disabled:opacity-50"
     >
       {label}
     </button>
@@ -64,25 +64,25 @@ export default function ScheduleListTable({
   onQuickAction,
 }: Props) {
   return (
-    <div className="overflow-x-auto rounded-2xl border border-[#D7BDA9] bg-[#FFF9F4] shadow-[0_8px_24px_rgba(91,52,33,0.08)]">
+    <div className="overflow-x-auto rounded-2xl border border-[#3f2d1a] bg-[#0f0905] shadow-[0_8px_24px_rgba(0,0,0,0.35)]">
       <table className="min-w-full">
-        <thead className="bg-[linear-gradient(180deg,#E7D0BE_0%,#E2C5B0_100%)] text-left">
+        <thead className="bg-[#1a0f06] text-left">
           <tr>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Schedule Name</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Structure / Block</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Start Date</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">End Date</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Status</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Billable</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Remarks</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Action</th>
-            <th className="px-4 py-3 text-sm font-bold text-[#5B3421]">Quick Actions</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Schedule Name</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Structure / Block</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Start Date</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">End Date</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Status</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Billable</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Remarks</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Action</th>
+            <th className="px-4 py-3 text-sm font-semibold text-[#8a6e4e]">Quick Actions</th>
           </tr>
         </thead>
         <tbody>
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={9} className="px-4 py-6 text-center text-sm text-[#7A5C4D]">
+              <td colSpan={9} className="px-4 py-6 text-center text-sm text-[#8a6e4e]">
                 No schedules found.
               </td>
             </tr>
@@ -95,53 +95,53 @@ export default function ScheduleListTable({
                 (row.is_locked && lockedReason !== "PAUSED") || isEditing;
 
               return (
-                <tr key={row.id} className="border-t border-[#E9D9CC] bg-[#FFF9F4]">
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                <tr key={row.id} className="border-t border-[#2b1e12] bg-[#110e0a]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     {isEditing ? (
                       <input
                         value={editScheduleForm?.schedule_name || ""}
                         onChange={(e) => onChangeScheduleEdit("schedule_name", e.target.value)}
-                        className="w-full rounded-lg border border-[#D8C2B5] bg-white px-2 py-1.5"
+                        className="w-full rounded-lg border border-[#3f2d1a] px-2 py-1.5"
                       />
                     ) : (
                       row.schedule_name
                     )}
                   </td>
 
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">{row.structure_name || "-"}</td>
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">{row.structure_name || "-"}</td>
 
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     {isEditing ? (
                       <input
                         type="date"
                         value={editScheduleForm?.start_date || ""}
                         onChange={(e) => onChangeScheduleEdit("start_date", e.target.value)}
-                        className="w-full rounded-lg border border-[#D8C2B5] bg-white px-2 py-1.5"
+                        className="w-full rounded-lg border border-[#3f2d1a] px-2 py-1.5"
                       />
                     ) : (
                       row.start_date || "-"
                     )}
                   </td>
 
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     {isEditing ? (
                       <input
                         type="date"
                         value={editScheduleForm?.end_date || ""}
                         onChange={(e) => onChangeScheduleEdit("end_date", e.target.value)}
-                        className="w-full rounded-lg border border-[#D8C2B5] bg-white px-2 py-1.5"
+                        className="w-full rounded-lg border border-[#3f2d1a] px-2 py-1.5"
                       />
                     ) : (
                       row.end_date || "-"
                     )}
                   </td>
 
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     {isEditing ? (
                       <select
                         value={editScheduleForm?.status || "Active"}
                         onChange={(e) => onChangeScheduleEdit("status", e.target.value)}
-                        className="w-full rounded-lg border border-[#D8C2B5] bg-white px-2 py-1.5"
+                        className="w-full rounded-lg border border-[#3f2d1a] px-2 py-1.5"
                       >
                         <option value="Active">Active</option>
                         <option value="Paused">Paused</option>
@@ -153,12 +153,12 @@ export default function ScheduleListTable({
                     )}
                   </td>
 
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     {isEditing ? (
                       <select
                         value={editScheduleForm?.is_billable ? "yes" : "no"}
                         onChange={(e) => onChangeScheduleEdit("is_billable", e.target.value === "yes")}
-                        className="w-full rounded-lg border border-[#D8C2B5] bg-white px-2 py-1.5"
+                        className="w-full rounded-lg border border-[#3f2d1a] px-2 py-1.5"
                       >
                         <option value="yes">Billable</option>
                         <option value="no">Non-Billable</option>
@@ -168,12 +168,12 @@ export default function ScheduleListTable({
                     )}
                   </td>
 
-                  <td className="px-4 py-3 text-sm text-[#5B3421]">
+                  <td className="px-4 py-3 text-sm text-[#f0e6d4]">
                     {isEditing ? (
                       <input
                         value={editScheduleForm?.remarks || ""}
                         onChange={(e) => onChangeScheduleEdit("remarks", e.target.value)}
-                        className="w-full rounded-lg border border-[#D8C2B5] bg-white px-2 py-1.5"
+                        className="w-full rounded-lg border border-[#3f2d1a] px-2 py-1.5"
                       />
                     ) : (
                       row.remarks || "-"
@@ -188,14 +188,14 @@ export default function ScheduleListTable({
                             type="button"
                             onClick={() => onSaveScheduleEdit(row.id)}
                             disabled={savingScheduleEdit}
-                            className="rounded-xl border border-[#6F4A36] bg-[#8B5E3C] px-3 py-2 text-xs font-semibold text-white shadow-[0_4px_0_#5B3421] disabled:opacity-60"
+                            className="rounded-xl border border-[#6b3e14] bg-[#d4933c] px-3 py-2 text-xs font-semibold text-[#1a0f06] hover:bg-[#c08030] disabled:opacity-60"
                           >
                             {savingScheduleEdit ? "Saving..." : "Save"}
                           </button>
                           <button
                             type="button"
                             onClick={onCancelScheduleEdit}
-                            className="rounded-xl border border-[#D8B7A6] bg-white px-3 py-2 text-xs font-semibold text-[#7A5C4D]"
+                            className="rounded-xl border border-[#3f2d1a] bg-transparent px-3 py-2 text-xs font-semibold text-[#d0b894] hover:bg-[#1a120b]"
                           >
                             Cancel
                           </button>
@@ -205,7 +205,7 @@ export default function ScheduleListTable({
                           <button
                             type="button"
                             onClick={() => onStartScheduleEdit(row)}
-                            className="rounded-xl border border-[#B58C72] bg-[#E7D0BE] px-3 py-2 text-xs font-semibold text-[#5B3421] shadow-[0_4px_0_#C5A48D]"
+                            className="rounded-xl border border-[#3f2d1a] bg-[#1a120b] px-3 py-2 text-xs font-semibold text-[#f0c27e] hover:bg-[#25180d]"
                           >
                             Edit
                           </button>
@@ -213,7 +213,7 @@ export default function ScheduleListTable({
                             type="button"
                             onClick={() => onDeleteSchedule(row)}
                             disabled={deletingScheduleId === row.id}
-                            className="rounded-xl border border-[#D8B7A6] bg-[#F6E8DC] px-3 py-2 text-xs font-semibold text-[#8A3C2A] shadow-[0_4px_0_#D8B7A6] disabled:opacity-50"
+                            className="rounded-xl border border-red-900/60 bg-red-950/25 px-3 py-2 text-xs font-semibold text-[#f87171] disabled:opacity-50"
                           >
                             {deletingScheduleId === row.id ? "Deleting..." : "Delete"}
                           </button>
