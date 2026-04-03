@@ -12,15 +12,20 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const token = getAccessToken();
-    const check = evaluateSessionToken(token);
-
-    if (!check.valid) {
+    if (!token) {
       clearSession();
-      router.replace(`/login?next=${encodeURIComponent(pathname || "/projects")}`);
+      window.location.replace(`/login?next=${encodeURIComponent(pathname || "/projects")}`);
       return;
     }
 
-    // Token exists → allow access
+    const check = evaluateSessionToken(token);
+
+    if (!check.valid && check.reason !== "invalid_token") {
+      clearSession();
+      window.location.replace(`/login?next=${encodeURIComponent(pathname || "/projects")}`);
+      return;
+    }
+
     setReady(true);
   }, [router, pathname]);
 
