@@ -1,52 +1,86 @@
-// ── Workbench store ───────────────────────────────────────────────────────────
-// Active tool, selection state, hover, dirty-node tracking.
-// This is the "cursor/interaction" layer — separate from scene data.
+"use client";
 
 import { create } from "zustand";
 import type { ToolType } from "../types/tools";
 
-interface WorkbenchState {
-  // ── Tool ────────────────────────────────────────────────────────────────
-  activeTool: ToolType;
+export type ToolId =
+  | ToolType
+  | "PAN"
+  | "DOOR"
+  | "WINDOW"
+  | "COLUMN"
+  | "BEAM"
+  | "STAIR";
 
-  // ── Selection ───────────────────────────────────────────────────────────
+export const TOOL_CATEGORY_MAP: Partial<Record<ToolId, string>> = {
+  WALL: "WALL",
+  SLAB: "SLAB",
+  DOOR: "DOOR",
+  WINDOW: "WINDOW",
+  COLUMN: "COLUMN",
+  BEAM: "BEAM",
+  STAIR: "STAIR",
+};
+
+export const CATEGORY_TOOL_MAP: Partial<Record<string, ToolId>> = {
+  WALL: "WALL",
+  SLAB: "SLAB",
+  DOOR: "DOOR",
+  WINDOW: "WINDOW",
+  COLUMN: "COLUMN",
+  BEAM: "BEAM",
+  STAIR: "STAIR",
+};
+
+export interface PaletteSelection {
+  categoryId: string | null;
+  familyId: string | null;
+  typeId: string | null;
+  assemblyId: string | null;
+  materialId: string | null;
+}
+
+const EMPTY_PALETTE: PaletteSelection = {
+  categoryId: null,
+  familyId: null,
+  typeId: null,
+  assemblyId: null,
+  materialId: null,
+};
+
+export interface WorkbenchState {
+  activeTool: ToolId | null;
   selectedIds: string[];
   hoveredId: string | null;
-
-  // ── Edit state ──────────────────────────────────────────────────────────
-  /** Whether any unsaved changes exist in the scene */
   isSceneDirty: boolean;
-
-  /** IDs of entities modified since last save — used for partial saves */
   dirtyEntityIds: string[];
-
-  // ── Status line ─────────────────────────────────────────────────────────
   statusMessage: string;
-
-  // ── Actions ─────────────────────────────────────────────────────────────
-  setActiveTool: (tool: ToolType) => void;
-
-  /** Replace selection with a new set */
+  projectId: string | null;
+  palette: PaletteSelection;
+  savedAt: string | null;
+  isDirty: boolean;
+  setActiveTool: (tool: ToolId | null) => void;
   setSelection: (ids: string[]) => void;
-
-  /** Add single ID to selection */
   addToSelection: (id: string) => void;
-
-  /** Remove single ID from selection */
   removeFromSelection: (id: string) => void;
-
-  /** Toggle single ID in selection */
   toggleSelection: (id: string) => void;
-
   clearSelection: () => void;
-
   setHovered: (id: string | null) => void;
-
   markEntityDirty: (id: string) => void;
   clearEntityDirty: (id: string) => void;
   clearAllDirty: () => void;
-
   setStatus: (msg: string) => void;
+  setProjectId: (id: string) => void;
+  setPalette: (patch: Partial<PaletteSelection>) => void;
+  resetPalette: () => void;
+  hydrateFromScene: (
+    palette: PaletteSelection,
+    activeTool: ToolId | null,
+    savedAt: string
+  ) => void;
+  setSavedAt: (ts: string) => void;
+  setDirty: (dirty: boolean) => void;
+  resetForProject: (projectId: string) => void;
 }
 
 export const useWorkbenchStore = create<WorkbenchState>()((set) => ({
@@ -56,24 +90,28 @@ export const useWorkbenchStore = create<WorkbenchState>()((set) => ({
   isSceneDirty: false,
   dirtyEntityIds: [],
   statusMessage: "Ready",
+  projectId: null,
+  palette: { ...EMPTY_PALETTE },
+  savedAt: null,
+  isDirty: false,
 
-  setActiveTool: (activeTool) => set({ activeTool }),
+  setActiveTool: (activeTool) => set({ activeTool, isDirty: true }),
 
   setSelection: (selectedIds) => set({ selectedIds }),
 
   addToSelection: (id) =>
-    set((s) => ({
-      selectedIds: s.selectedIds.includes(id) ? s.selectedIds : [...s.selectedIds, id],
+    set((state) => ({
+      selectedIds: state.selectedIds.includes(id) ? state.selectedIds : [...state.selectedIds, id],
     })),
 
   removeFromSelection: (id) =>
-    set((s) => ({ selectedIds: s.selectedIds.filter((x) => x !== id) })),
+    set((state) => ({ selectedIds: state.selectedIds.filter((value) => value !== id) })),
 
   toggleSelection: (id) =>
-    set((s) => ({
-      selectedIds: s.selectedIds.includes(id)
-        ? s.selectedIds.filter((x) => x !== id)
-        : [...s.selectedIds, id],
+    set((state) => ({
+      selectedIds: state.selectedIds.includes(id)
+        ? state.selectedIds.filter((value) => value !== id)
+        : [...state.selectedIds, id],
     })),
 
   clearSelection: () => set({ selectedIds: [] }),
@@ -81,20 +119,61 @@ export const useWorkbenchStore = create<WorkbenchState>()((set) => ({
   setHovered: (hoveredId) => set({ hoveredId }),
 
   markEntityDirty: (id) =>
-    set((s) => ({
+    set((state) => ({
       isSceneDirty: true,
-      dirtyEntityIds: s.dirtyEntityIds.includes(id)
-        ? s.dirtyEntityIds
-        : [...s.dirtyEntityIds, id],
+      isDirty: true,
+      dirtyEntityIds: state.dirtyEntityIds.includes(id)
+        ? state.dirtyEntityIds
+        : [...state.dirtyEntityIds, id],
     })),
 
   clearEntityDirty: (id) =>
-    set((s) => {
-      const dirtyEntityIds = s.dirtyEntityIds.filter((x) => x !== id);
-      return { dirtyEntityIds, isSceneDirty: dirtyEntityIds.length > 0 };
+    set((state) => {
+      const dirtyEntityIds = state.dirtyEntityIds.filter((value) => value !== id);
+      return {
+        dirtyEntityIds,
+        isSceneDirty: dirtyEntityIds.length > 0,
+      };
     }),
 
-  clearAllDirty: () => set({ isSceneDirty: false, dirtyEntityIds: [] }),
+  clearAllDirty: () => set({ isSceneDirty: false, dirtyEntityIds: [], isDirty: false }),
 
   setStatus: (statusMessage) => set({ statusMessage }),
+
+  setProjectId: (projectId) => set({ projectId }),
+
+  setPalette: (patch) =>
+    set((state) => ({ palette: { ...state.palette, ...patch }, isDirty: true })),
+
+  resetPalette: () => set({ palette: { ...EMPTY_PALETTE } }),
+
+  hydrateFromScene: (palette, activeTool, savedAt) =>
+    set({ palette, activeTool, savedAt, isDirty: false }),
+
+  setSavedAt: (savedAt) => set({ savedAt, isDirty: false }),
+
+  setDirty: (isDirty) => set({ isDirty }),
+
+  resetForProject: (projectId) =>
+    set({
+      projectId,
+      activeTool: null,
+      selectedIds: [],
+      hoveredId: null,
+      isSceneDirty: false,
+      dirtyEntityIds: [],
+      statusMessage: "Ready",
+      palette: { ...EMPTY_PALETTE },
+      savedAt: null,
+      isDirty: false,
+    }),
 }));
+
+export const workbenchSelectors = {
+  projectId: (state: WorkbenchState) => state.projectId,
+  activeTool: (state: WorkbenchState) => state.activeTool,
+  palette: (state: WorkbenchState) => state.palette,
+  activeTypeId: (state: WorkbenchState) => state.palette.typeId,
+  activeCategoryId: (state: WorkbenchState) => state.palette.categoryId,
+  activeFamilyId: (state: WorkbenchState) => state.palette.familyId,
+};

@@ -2,7 +2,7 @@ export const COMPANY_LOGO_VERSION_KEY = "dpr-company-logo-version";
 export const COMPANY_LOGO_CHANGED_EVENT = "dpr-company-logo-changed";
 
 export function readCompanyLogoVersion(): number {
-  if (typeof window === "undefined") return Date.now();
+  if (typeof window === "undefined") return 1;
   try {
     const raw = window.localStorage.getItem(COMPANY_LOGO_VERSION_KEY);
     const parsed = Number(raw);
@@ -10,7 +10,7 @@ export function readCompanyLogoVersion(): number {
   } catch {
     // ignore
   }
-  return Date.now();
+  return 1;
 }
 
 export function bumpCompanyLogoVersion(): number {

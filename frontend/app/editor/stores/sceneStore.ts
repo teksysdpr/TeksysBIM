@@ -1,51 +1,31 @@
-// ── Scene store ───────────────────────────────────────────────────────────────
-// Normalised flat record of all BIM entities.
-// The scene mesh is NOT the source of truth — this store is.
-// Three.js objects are derived from this state on render.
+"use client";
 
 import { create } from "zustand";
 import type { BimEntity } from "../types/model";
+import type { SceneEntity, WallInstance } from "../types/sceneTypes";
 import { buildMockScene } from "../lib/mockScene";
 
 interface SceneState {
-  // Flat entity record — indexed by entity ID
   entities: Record<string, BimEntity>;
-
-  // Top-level root IDs (PROJECT nodes)
+  placedEntities: SceneEntity[];
   rootIds: string[];
-
-  // Which project is loaded
   activeProjectId: string | null;
-
-  // ── Actions ──────────────────────────────────────────────────────────────
-
-  /** Replace entire entity map (e.g. on API load) */
   loadEntities: (entities: Record<string, BimEntity>, rootIds: string[]) => void;
-
-  /** Load the built-in demo scene */
   loadMockScene: () => void;
-
-  /** Patch a single entity's fields */
   patchEntity: (id: string, patch: Partial<BimEntity>) => void;
-
-  /** Toggle entity visibility */
   setVisibility: (id: string, visible: boolean) => void;
-
-  /** Toggle lock */
   setLocked: (id: string, locked: boolean) => void;
-
-  /** Mark entity as dirty */
   markDirty: (id: string) => void;
-
-  /** Clear dirty flag (after save) */
   clearDirty: (id: string) => void;
-
-  /** Clear all entities */
+  addWall: (wall: WallInstance) => void;
+  removeEntity: (id: string) => void;
   clearScene: () => void;
+  setEntities: (entities: SceneEntity[]) => void;
 }
 
 export const useSceneStore = create<SceneState>()((set) => ({
   entities: {},
+  placedEntities: [],
   rootIds: [],
   activeProjectId: null,
 
@@ -100,23 +80,48 @@ export const useSceneStore = create<SceneState>()((set) => ({
       };
     }),
 
-  clearScene: () => set({ entities: {}, rootIds: [], activeProjectId: null }),
+  addWall: (wall) =>
+    set((s) => ({
+      placedEntities: [...s.placedEntities, { kind: "WALL", data: wall }],
+    })),
+
+  removeEntity: (id) =>
+    set((s) => ({
+      placedEntities: s.placedEntities.filter((entity) => {
+        if (entity.kind === "WALL") return entity.data.id !== id;
+        return true;
+      }),
+    })),
+
+  clearScene: () =>
+    set({
+      entities: {},
+      placedEntities: [],
+      rootIds: [],
+      activeProjectId: null,
+    }),
+
+  setEntities: (placedEntities) => set({ placedEntities }),
 }));
 
-// ── Selectors ─────────────────────────────────────────────────────────────────
-
-export function selectEntity(entities: Record<string, BimEntity>, id: string): BimEntity | undefined {
+export function selectEntity(
+  entities: Record<string, BimEntity>,
+  id: string
+): BimEntity | undefined {
   return entities[id];
 }
 
-export function selectChildren(entities: Record<string, BimEntity>, parentId: string): BimEntity[] {
+export function selectChildren(
+  entities: Record<string, BimEntity>,
+  parentId: string
+): BimEntity[] {
   const parent = entities[parentId];
   if (!parent) return [];
   return parent.childIds.map((cid) => entities[cid]).filter(Boolean) as BimEntity[];
 }
 
 export function selectLevels(entities: Record<string, BimEntity>): BimEntity[] {
-  return Object.values(entities).filter((e) => e.type === "LEVEL");
+  return Object.values(entities).filter((entity) => entity.type === "LEVEL");
 }
 
 export function selectElementsForLevel(
@@ -130,12 +135,19 @@ export function selectElementsForLevel(
       const child = entities[cid];
       if (!child) return [];
       if (child.type === "ELEMENT") return [child];
-      // Recurse into ZONE
       if (child.type === "ZONE") {
         return child.childIds
           .map((eid) => entities[eid])
-          .filter((e): e is BimEntity => !!e && e.type === "ELEMENT");
+          .filter((entity): entity is BimEntity => !!entity && entity.type === "ELEMENT");
       }
       return [];
     });
 }
+
+export const sceneSelectors = {
+  walls: (state: SceneState): WallInstance[] =>
+    state.placedEntities
+      .filter((entity): entity is { kind: "WALL"; data: WallInstance } => entity.kind === "WALL")
+      .map((entity) => entity.data),
+  entityCount: (state: SceneState) => state.placedEntities.length,
+};

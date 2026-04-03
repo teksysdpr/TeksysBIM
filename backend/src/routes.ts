@@ -11,6 +11,7 @@ import { notificationsRouter } from "./modules/notifications/notifications.contr
 import { takeoffRouter } from "./modules/takeoff/takeoff.controller.js";
 import { costingRouter } from "./modules/costing/costing.controller.js";
 import { deliverablesRouter } from "./modules/deliverables/deliverables.controller.js";
+import { bimRouter } from "./modules/bim/bim-scene.controller.js";
 
 export const apiRouter = Router();
 
@@ -34,3 +35,4 @@ apiRouter.use("/notifications", notificationsRouter);
 apiRouter.use("/takeoff", takeoffRouter);
 apiRouter.use("/costing", costingRouter);
 apiRouter.use("/", deliverablesRouter);
+apiRouter.use("/bim", bimRouter);
