@@ -5,5 +5,15 @@ export default function CompanyLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <AuthGuard>{children}</AuthGuard>;
+  return (
+    <>
+      <style>{`
+        body > header,
+        body > footer {
+          display: none !important;
+        }
+      `}</style>
+      <AuthGuard>{children}</AuthGuard>
+    </>
+  );
 }

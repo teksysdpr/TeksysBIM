@@ -488,14 +488,29 @@ export default function EditorCanvas() {
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
+
+    const syncSize = () => {
+      const rect = el.getBoundingClientRect();
+      setSize({
+        w: Math.max(Math.floor(rect.width), 1),
+        h: Math.max(Math.floor(rect.height), 1),
+      });
+    };
+
+    syncSize();
+
+    if (typeof ResizeObserver !== "function") {
+      window.addEventListener("resize", syncSize);
+      return () => window.removeEventListener("resize", syncSize);
+    }
+
     const ro = new ResizeObserver((entries) => {
       const r = entries[0]?.contentRect;
-      if (r) {
-        setSize({
-          w: Math.max(Math.floor(r.width), 1),
-          h: Math.max(Math.floor(r.height), 1),
-        });
-      }
+      if (!r) return;
+      setSize({
+        w: Math.max(Math.floor(r.width), 1),
+        h: Math.max(Math.floor(r.height), 1),
+      });
     });
     ro.observe(el);
     return () => ro.disconnect();

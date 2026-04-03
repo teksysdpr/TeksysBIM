@@ -122,11 +122,16 @@ export default function DashboardClient() {
   const [projectsLoading, setProjectsLoading]     = useState(true);
   const [conversionsLoading, setConversionsLoading] = useState(true);
   const [alertsLoading, setAlertsLoading]         = useState(true);
-
-  const user = getStoredUser() as { fullName?: string; email?: string } | null;
-  const displayName = user?.fullName ?? user?.email ?? "there";
+  const [displayName, setDisplayName] = useState("there");
+  const [greeting, setGreeting] = useState("Welcome");
+  const [dateLabel, setDateLabel] = useState("");
 
   useEffect(() => {
+    const user = getStoredUser() as { fullName?: string; email?: string } | null;
+    setDisplayName(user?.fullName ?? user?.email ?? "there");
+    setGreeting(getGreeting());
+    setDateLabel(todayLabel());
+
     fetchDashboardSummary()
       .then(setSummary).catch(() => setSummary(null))
       .finally(() => setSummaryLoading(false));
@@ -152,9 +157,9 @@ export default function DashboardClient() {
               TeksysBIM · Operations Hub
             </p>
             <h1 className="mt-2 text-2xl font-black text-[#f8e8cf] md:text-3xl">
-              {getGreeting()}, {displayName}
+              {greeting}, {displayName}
             </h1>
-            <p className="mt-1 text-sm text-[#8a6e4e]">{todayLabel()}</p>
+            <p className="mt-1 text-sm text-[#8a6e4e]">{dateLabel || "Loading workspace..."}</p>
           </div>
           <div className="flex items-center gap-2 rounded-2xl border border-[#2b1e12] bg-[#0e0b07] px-4 py-2.5">
             <span className="h-2 w-2 rounded-full bg-[#34d399]" />
